@@ -19,12 +19,12 @@ body {
   text-align: center;
 }
 #items-row {
-  margin: 0px auto;
-  width: 400px;
+  width: 450px;
 }
 .item-panel {
   margin-top: 25px;
   margin-bottom: 15px;
+  width: 112px;
 }
 .item-panel ul {
   list-style-type: none;

@@ -1,5 +1,5 @@
 div {
-  
+
 }
 body {
   background-color: #FFFFFF;
@@ -13,10 +13,14 @@ body {
 }
 #containerRow {
   margin: 0px auto;
-  width: 400px;
+  width: 450px;
 }
 #content {
   text-align: center;
+}
+#items-row {
+  margin: 0px auto;
+  width: 400px;
 }
 .item-panel {
   margin-top: 25px;

@@ -80,14 +80,18 @@ var HotSLootChestCalc = (function() {
 	
 	function setItem(evt) {
 	  if ($(evt.target).html().length == 1) {
-	    items[$(this).attr("id").charAt(4)].quality = 
-		    $(evt.target).attr("class").split(" ")[0];
-		$(evt.target).toggleClass("selected");
+		  var itemBoxes = $(this).find("a");
+		  for (var i = 0; i < 4; i++)
+			  $(itemBoxes[i]).removeClass("selected");
+		
+	      items[$(this).attr("id").charAt(4)].quality = 
+		      $(evt.target).attr("class").split(" ")[0];
+		  $(evt.target).toggleClass("selected");
 	  }
 	  else {
-		var duplicate = items[$(this).attr("id").charAt(4)].duplicate;
-	    items[$(this).attr("id").charAt(4)].duplicate = !duplicate;
-		$(evt.target).toggleClass("selected");
+		  var duplicate = items[$(this).attr("id").charAt(4)].duplicate;
+	      items[$(this).attr("id").charAt(4)].duplicate = !duplicate;
+		  $(evt.target).toggleClass("selected");
 	  }
 	  
 	  showResult();
@@ -98,7 +102,10 @@ var HotSLootChestCalc = (function() {
 	return {
 		init: function() {
 			$(".item-panel ul").on('click', setItem);
-						
+			
+			for (item in items)
+				$("#item" + item + " a." + items[item].quality).toggleClass("selected");
+			
 			showResult();
 		}
 	};

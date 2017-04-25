@@ -55,7 +55,7 @@ var HotSLootChestCalc = (function() {
 		}
 	};
 	/*********************************************************
-	**********************HTML TEMPLATES**********************
+	**********************CHEST FUNCTIONS*********************
 	*********************************************************/
 	function showResult() {
 		var averageValue = 0;
@@ -79,14 +79,15 @@ var HotSLootChestCalc = (function() {
 	}
 	
 	function setItem(evt) {
-	  if (evt.target.innerHTML.length == 1)
-	    items[$(this).attr("id").charAt(4)].quality = evt.target.getAttribute("class");
+	  if ($(evt.target).html().length == 1) {
+	    items[$(this).attr("id").charAt(4)].quality = 
+		    $(evt.target).attr("class").split(" ")[0];
+		$(evt.target).toggleClass("selected");
+	  }
 	  else {
-		var duplicate = !items[$(this).attr("id").charAt(4)].duplicate;
-	    items[$(this).attr("id").charAt(4)].duplicate = duplicate;
-		if (duplicate)
-			evt.target.setAttribute("class", "duplicate selected");
-		else evt.target.setAttribute("class", "duplicate");
+		var duplicate = items[$(this).attr("id").charAt(4)].duplicate;
+	    items[$(this).attr("id").charAt(4)].duplicate = !duplicate;
+		$(evt.target).toggleClass("selected");
 	  }
 	  
 	  showResult();

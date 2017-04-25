@@ -19,7 +19,7 @@ body {
   text-align: center;
 }
 #items-row {
-  width: 410px;
+  width: 384px;
   margin: 0px auto;
 }
 .item-panel {
@@ -86,6 +86,20 @@ body {
 }
 .result-panel {
   font-size: 16px;
+}
+.collection-panel {
+  margin-bottom: 5px;
+  padding-left: 60px;
+  font-size: 12px;
+  text-align: left;
+}
+input {
+  width: 25px;
+}
+hr {
+  height: 6px;
+  background: url(../images/hr.png) repeat-x 0 0;
+  border: 0;
 }
 .vertical-center {
   min-height: 100%;  /* Fallback for browsers do NOT support vh unit */

@@ -5,15 +5,22 @@ var HotSLootChestCalc = (function() {
 	/*********************************************************
 	***************************DATA***************************
 	*********************************************************/
-	var totalItems = {
-		common: 50,
-		rare: 20,
-		epic: 10,
-		legendary: 5
+	var raritiesEnum = {
+	  common: "common",
+	  rare: "rare",
+	  epic: "epic",
+	  legendary: "legendary"
 	};
 	
-	var ownedItems = {
-		common: 0,
+	var itemsTotal = {
+		common: 500,
+		rare: 200,
+		epic: 100,
+		legendary: 50
+	};
+	
+	var itemsOwned = {
+		common: 50,
 		rare: 0,
 		epic: 0,
 		legendary: 0
@@ -60,8 +67,8 @@ var HotSLootChestCalc = (function() {
 	function showResult() {
 		var averageValue = 0;
 		for (rarity in chanceOfGetting) {
-		averageValue += chanceOfGetting[rarity] * ((ownedItems[rarity] / totalItems[rarity]) * duplicateValue[rarity]
-		            + ((totalItems[rarity] - ownedItems[rarity]) / totalItems[rarity]) * itemValue[rarity]);
+		averageValue += chanceOfGetting[rarity] * ((itemsOwned[rarity] / itemsTotal[rarity]) * duplicateValue[rarity]
+		            + ((itemsTotal[rarity] - itemsOwned[rarity]) / itemsTotal[rarity]) * itemValue[rarity]);
 		}
 		
 		$("#average-value").html((averageValue * 4).toFixed(1));
@@ -73,9 +80,14 @@ var HotSLootChestCalc = (function() {
 		
 		$("#chest-value").html((chestValue));
 		
-		if ($("#chest-value").html() > $("#chest-average").html())
-		    $("#result-chest").css("background-color", "green");
-		else $("#result-average").css("background-color", "#98FF21");
+		if (parseFloat($("#chest-value").html()) > parseFloat($("#average-value").html())) {
+			$("#result-average").css("background-color", "#FFFFFF");
+		    $("#result-chest").css("background-color", "#98FF21");
+		}
+		else {
+			$("#result-average").css("background-color", "#98FF21");
+			$("#result-chest").css("background-color", "#FFFFFF");
+		}
 	}
 	
 	function setItem(evt) {
@@ -96,15 +108,29 @@ var HotSLootChestCalc = (function() {
 	  
 	  showResult();
 	}
+	
+	function setItemsOwned(evt) {
+		var rarity = $(this).parent().attr("class").split(" ").pop();
+		itemsOwned[rarity] = $(this).val();
+		
+		showResult();
+	}
 	/*********************************************************
 	***********************MAIN FUNCTION**********************
 	*********************************************************/
 	return {
 		init: function() {
-			$(".item-panel ul").on('click', setItem);
+			$(".item-panel ul").on("click", setItem);
 			
 			for (item in items)
 				$("#item" + item + " a." + items[item].quality).toggleClass("selected");
+			
+			for (rarity in raritiesEnum) {
+			    $(".collection-panel." + rarity + " :text").val(itemsOwned[rarity]);
+				$(".collection-panel." + rarity + " .items-total").html(itemsTotal[rarity]);
+			}
+			
+			$(".collection-panel :text").on("focusout", setItemsOwned);
 			
 			showResult();
 		}

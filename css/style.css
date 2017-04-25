@@ -1,0 +1,83 @@
+div {
+  border: 1px black solid;
+}
+body {
+  background-color: #FFFFFF;
+  font-size: 10px;
+  margin: 0;
+  padding: 0;
+}
+#container {
+  margin: 0px auto;
+  max-width: 940px;
+}
+#containerRow {
+  margin: 0px auto;
+  width: 400px;
+}
+#content {
+  text-align: center;
+}
+.item-panel {
+  margin-top: 30px;
+  margin-bottom: 10px;
+}
+.item-panel ul {
+  list-style-type: none;
+  margin-top: 2px;
+  padding: 0;
+}
+.item-panel li a {
+  float: left;
+  width: 33px;
+  font-size: 10px;
+  color: black;
+  padding: 5px 0px;
+  margin: 0px;
+  text-decoration: none;
+  text-transform: uppercase;
+  background-color: #FFFFFF;
+  cursor: pointer;
+}
+.item-panel li a.common {
+  box-shadow: inset 0 0 40px 1px rgba(204, 204, 204, 0.4);
+}
+.item-panel li a.common.selected {
+  box-shadow: inset 0 0 40px 1px rgba(204, 204, 204, 1.0);
+}
+.item-panel li a.rare {
+  box-shadow: inset 0 0 40px 1px rgba(0, 0, 250, 0.4);
+}
+.item-panel li a.rare.selected {
+  box-shadow: inset 0 0 40px 1px rgba(0, 0, 250, 1.0);
+}
+.item-panel li a.epic {
+  box-shadow: inset 0 0 40px 1px rgba(128, 0, 128, 0.4);
+}
+.item-panel li a.epic.selected {
+  box-shadow: inset 0 0 40px 1px rgba(128, 0, 128, 1.0);
+}
+.item-panel li a.legendary {
+  box-shadow: inset 0 0 40px 1px rgba(255, 165, 0, 0.4);
+}
+.item-panel li a.legendary.selected {
+  box-shadow: inset 0 0 40px 1px rgba(255, 165, 0, 1.0);
+}
+.item-panel li a.duplicate {
+  width: 66px;
+  height: 20px;
+  background-color: #FFFFFF;
+}
+.item-panel li a.duplicate.selected {
+  background-color: #E3D3C8;
+}
+.result-panel {
+  font-size: 16px;
+}
+.vertical-center {
+  min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+  min-height: 100vh; /* These two lines are counted as one :-)       */
+
+  display: flex;
+  align-items: center;
+}

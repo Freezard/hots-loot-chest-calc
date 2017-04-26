@@ -13,14 +13,14 @@ var HotSLootChestCalc = (function() {
 	};
 	
 	var itemsTotal = {
-		common: 500,
-		rare: 200,
-		epic: 100,
-		legendary: 50
+		common: 522,
+		rare: 452,
+		epic: 278,
+		legendary: 130
 	};
 	
 	var itemsOwned = {
-		common: 50,
+		common: 0,
 		rare: 0,
 		epic: 0,
 		legendary: 0
@@ -40,6 +40,7 @@ var HotSLootChestCalc = (function() {
 		legendary: 400
 	};
 	
+	// https://www.pcgamesn.com/heroes-of-the-storm/hots-loot-chest-opening-chances
 	var chanceOfGetting = {
 		common: 0.7176,
 		rare: 0.1913,
@@ -113,13 +114,28 @@ var HotSLootChestCalc = (function() {
 		var rarity = $(this).parent().attr("class").split(" ").pop();
 		itemsOwned[rarity] = $(this).val();
 		
+		updateLocalStorage();
 		showResult();
+	}
+	
+	function loadLocalStorage() {
+		var collection = JSON.parse(localStorage.getItem('collection'));
+		if (collection)
+			itemsOwned = collection;
+	}
+	
+	function updateLocalStorage() {
+		localStorage.setItem("collection", JSON.stringify(itemsOwned));
 	}
 	/*********************************************************
 	***********************MAIN FUNCTION**********************
 	*********************************************************/
 	return {
 		init: function() {
+			if (typeof(Storage) !== "undefined") {
+				loadLocalStorage();
+			}
+			
 			$(".item-panel ul").on("click", setItem);
 			
 			for (item in items)

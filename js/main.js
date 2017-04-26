@@ -63,9 +63,49 @@ var HotSLootChestCalc = (function() {
 		}
 	};
 	/*********************************************************
-	**********************CHEST FUNCTIONS*********************
+	***************************INIT***************************
 	*********************************************************/
-	function showResult() {
+	function initEventListeners() {
+		// eventListener for item panels
+		$(".item-panel ul").on("click", setItem);
+			
+		// eventListener for entering collection data
+		$(".collection-panel :text").on("focusout", setItemsOwned);	
+
+		// eventListener for clicking Keep Items button
+		$("#buttonKeepItems").on("click", function() {
+			$(this).tooltip('hide'); keepItems();});
+	}
+	
+	function initDisplay() {
+		// Pre-select item rarity for each item
+		for (item in items)
+			$("#item" + item + " a." + items[item].quality).toggleClass("selected");
+			
+		// Display collection data
+		displayCollection();
+			
+		// Calculate chest values and display result
+		updateChestValue();
+		updateAverageValue();
+		displayResult();
+
+		// Activate tooltips
+		$('[data-toggle="tooltip"]').tooltip({ delay: { show: 750, hide: 0 } });
+	}
+	/*********************************************************
+	**********************CHEST FUNCTIONS*********************
+	*********************************************************/	
+	function updateChestValue() {
+		var chestValue = 0;
+		for (item in items)
+			chestValue += items[item].duplicate ?
+			    duplicateValue[items[item].quality] : itemValue[items[item].quality];
+		
+		$("#chest-value").html((chestValue));		
+	}
+	
+	function updateAverageValue() {
 		var averageValue = 0;
 		for (rarity in chanceOfGetting) {
 		averageValue += chanceOfGetting[rarity] * ((itemsOwned[rarity] / itemsTotal[rarity]) * duplicateValue[rarity]
@@ -73,14 +113,11 @@ var HotSLootChestCalc = (function() {
 		}
 		
 		$("#average-value").html((averageValue * 4).toFixed(1));
-		
-		var chestValue = 0;
-		for (item in items)
-			chestValue += items[item].duplicate ?
-			    duplicateValue[items[item].quality] : itemValue[items[item].quality];
-		
-		$("#chest-value").html((chestValue));
-		
+	}	
+	/*********************************************************
+	**************************DISPLAY*************************
+	*********************************************************/		
+	function displayResult() {
 		if (parseFloat($("#chest-value").html()) > parseFloat($("#average-value").html())) {
 			$("#result-average").css("background-color", "#FFFFFF");
 		    $("#result-chest").css("background-color", "#98FF21");
@@ -91,6 +128,15 @@ var HotSLootChestCalc = (function() {
 		}
 	}
 	
+	function displayCollection() {
+		for (rarity in raritiesEnum) {
+		    $(".collection-panel." + rarity + " :text").val(itemsOwned[rarity]);
+			$(".collection-panel." + rarity + " .items-total").html(itemsTotal[rarity]);
+		}		
+	}
+	/*********************************************************
+	**********************ITEM FUNCTIONS**********************
+	*********************************************************/		
 	function setItem(evt) {
 	  if ($(evt.target).html().length == 1) {
 		  var itemBoxes = $(this).find("a");
@@ -107,7 +153,8 @@ var HotSLootChestCalc = (function() {
 		  $(evt.target).toggleClass("selected");
 	  }
 	  
-	  showResult();
+	  updateChestValue();
+	  displayResult();
 	}
 	
 	function setItemsOwned(evt) {
@@ -115,9 +162,23 @@ var HotSLootChestCalc = (function() {
 		itemsOwned[rarity] = $(this).val();
 		
 		updateLocalStorage();
-		showResult();
+		updateAverageValue();
+		displayResult();
 	}
 	
+	function keepItems() {
+		for (item in items)
+			if (!items[item].duplicate)
+				itemsOwned[items[item].quality]++;
+		
+		updateLocalStorage();
+		updateAverageValue();
+		displayResult();
+		displayCollection();
+	}	
+	/*********************************************************
+	**********************LOCAL STORAGE***********************
+	*********************************************************/	
 	function loadLocalStorage() {
 		var collection = JSON.parse(localStorage.getItem('collection'));
 		if (collection)
@@ -132,25 +193,13 @@ var HotSLootChestCalc = (function() {
 	*********************************************************/
 	return {
 		init: function() {
-			if (typeof(Storage) !== "undefined") {
+			// Check for HTML5 storage support
+			if (typeof(Storage) !== "undefined")
+				// Load collection
 				loadLocalStorage();
-			}
 			
-			$(".item-panel ul").on("click", setItem);
-			
-			for (item in items)
-				$("#item" + item + " a." + items[item].quality).toggleClass("selected");
-			
-			for (rarity in raritiesEnum) {
-			    $(".collection-panel." + rarity + " :text").val(itemsOwned[rarity]);
-				$(".collection-panel." + rarity + " .items-total").html(itemsTotal[rarity]);
-			}
-			
-			$(".collection-panel :text").on("focusout", setItemsOwned);
-			
-			showResult();
-			
-			$('[data-toggle="tooltip"]').tooltip({ delay: { show: 500, hide: 0 } });
+			initEventListeners();
+			initDisplay();
 		}
 	};
 })();

@@ -96,6 +96,9 @@ body {
   font-size: 12px;
   text-align: left;
 }
+#buttonKeepItems {
+  margin-top: 20px;
+}
 input {
   width: 25px;
 }

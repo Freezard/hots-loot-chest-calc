@@ -72,27 +72,32 @@
 	  </div>
 	  <div class="row">
 	    <div class="col-xs-6 result-panel">
-		  <span id="result-chest">Chest Value: <span id="chest-value">200</span></span>
+		  <span id="result-chest" data-toggle="tooltip" title="Shards received from this chest">Chest Value: <span id="chest-value">200</span></span>
 		</div>
 		<div class="col-xs-6 result-panel">
-		  <span id="result-average">Average Value: <span id="average-value">577</span></span>
+		  <span id="result-average" data-toggle="tooltip" title="Shards received from a chest on average (non-duplicates are worth their full shard value)">Average Value: <span id="average-value">577</span></span>
 		</div>
 	  </div>
 	  <div class="row">
-	  <hr>
+	    <div class="col-xs-12 collection-header">
+	      <hr>
+		  Collection
+	    </div>
+	  </div>
+	  <div class="row">
 	    <div class="col-xs-6 collection-panel common">
-		  Common: <input type="text"> / <span class="items-total">0</span>
+		  <span data-toggle="tooltip" title="Common items owned/total">Common:</span> <input type="text"> / <span class="items-total">0</span>
 		</div>
 		<div class="col-xs-6 collection-panel rare">
-		  Rare: <input type="text"> / <span class="items-total">0</span>
+		  <span data-toggle="tooltip" title="Rare items owned/total">Rare:</span> <input type="text"> / <span class="items-total">0</span>
 		</div>
 	  </div>
 	  <div class="row">
 	    <div class="col-xs-6 collection-panel epic">
-		  Epic: <input type="text"> / <span class="items-total">0</span>
+		  <span data-toggle="tooltip" title="Epic items owned/total">Epic:</span> <input type="text"> / <span class="items-total">0</span>
 		</div>
 		<div class="col-xs-6 collection-panel legendary">
-		  Legendary: <input type="text"> / <span class="items-total">0</span>
+		  <span data-toggle="tooltip" title="Legendary items owned/total">Legendary:</span> <input type="text"> / <span class="items-total">0</span>
 		</div>
 	  </div>		  
     </div>

@@ -87,6 +87,9 @@ body {
 .result-panel {
   font-size: 16px;
 }
+.collection-header {
+  font-size: 14px;
+}
 .collection-panel {
   margin-bottom: 5px;
   padding-left: 60px;

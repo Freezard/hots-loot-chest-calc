@@ -133,6 +133,8 @@ var HotSLootChestCalc = (function() {
 			$(".collection-panel :text").on("focusout", setItemsOwned);
 			
 			showResult();
+			
+			$('[data-toggle="tooltip"]').tooltip({ delay: { show: 500, hide: 0 } });
 		}
 	};
 })();

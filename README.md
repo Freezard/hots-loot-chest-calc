@@ -20,3 +20,4 @@ Website can be found at https://freezard.github.io/hots-reroll-calc/
   C = Common R = Rare E = Epic L = Legendary
 - Specify whether the items you got were duplicates by clicking on the DUPLICATES boxes.
 - The chest value in shards will be compared to the average chest value. If it's lower, consider rerolling.
+- Pressing the Keep Items button will automatically add any new items from the chest to your collection.

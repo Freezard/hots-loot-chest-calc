@@ -1,5 +1,5 @@
 div {
-
+ /*border: 1px solid black;*/
 }
 body {
   background-color: #FFFFFF;
@@ -19,7 +19,7 @@ body {
   text-align: center;
 }
 #items-row {
-  width: 384px;
+  /*width: 384px;*/
   margin: 0px auto;
 }
 .item-panel {
@@ -30,6 +30,7 @@ body {
   list-style-type: none;
   margin-top: 2px;
   padding: 0;
+  display: inline-block;
 }
 .item-panel li a {
   float: left;
@@ -96,6 +97,12 @@ body {
   font-size: 12px;
   text-align: left;
 }
+#chest-type-panel {
+  font-size: 12px;
+  text-align: left;
+  padding-left: 65px;
+  margin-bottom: 10px;
+}
 #buttonKeepItems {
   margin-top: 20px;
 }
@@ -121,4 +128,18 @@ hr {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+}
+.col-xs-5ths,
+.col-sm-5ths,
+.col-md-5ths,
+.col-lg-5ths {
+    position: relative;
+    min-height: 1px;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+.col-xs-5ths {
+    width: 15%;
+    float: left;
 }

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>HotS Loot Chest Calc - </title>
+<title>HotS Reroll Calc - </title>
 <!-- Bootstrap CSS CDN -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="css/style.css">
@@ -24,11 +24,21 @@
   <div id="containerRow" class="row">
 	<div id="content" class="col-xs-12">
 	  <div class="row">
-	    <div id="image-panel" class="col-xs-12">
-          <img src="images/loot_chest_common.jpg" alt="Classic pack" width="320" height="180">
+	    <div id="chest-type-panel" class="col-xs-12">
+		  <select id="chest-type">
+		    <option value="common">Common</option>
+            <option value="rare">Rare</option>
+            <option value="epic">Epic</option>
+            <!--<option value="legendary">Veteran</option>-->
+		  </select>
 		</div>
 	  </div>
-      <div id="items-row" class="row noselect">
+	  <div class="row">
+	    <div id="image-panel" class="col-xs-12">
+          <img src="images/chest_common.png" alt="Loot chest" width="320" height="180">
+		</div>
+	  </div>
+      <div id="items-row" class="row noselect ">
 	    <div class="col-xs-3 item-panel">
 		Item 1
 		  <ul id="item1">

@@ -1,7 +1,7 @@
-# HotS Loot Chest Calc
+# HotS Reroll Calc
 Helps you determine when to consider rerolling loot chests.
 
-Website can be found at https://freezard.github.io/hots-loot-chest-calc/
+Website can be found at https://freezard.github.io/hots-reroll-calc/
 
 ## FEATURES
 - Displays the effective amount of shards you will receive from a loot chest.

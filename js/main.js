@@ -72,10 +72,15 @@ var HotSRerollCalc = (function() {
 		// eventListener for entering collection data
 		$(".collection-panel :text").on("focusout", setItemsOwned);	
 
-		// eventListener for clicking Keep Items button
+		// eventListener for clicking the Reroll Items button
+		$("#buttonRerollItems").on("click", function() {
+			$(this).tooltip('hide'); newChest($("#chest-type").val());});
+		
+		// eventListener for clicking the Keep Items button
 		$("#buttonKeepItems").on("click", function() {
 			$(this).tooltip('hide'); keepItems();});
 		
+		// eventListener for selecting chest type
 		$("#chest-type").on("change", function() { newChest($(this).val()) });
 	}
 	

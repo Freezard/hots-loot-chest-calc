@@ -97,7 +97,8 @@ var HotSRerollCalc = (function() {
 		displayResult();
 
 		// Activate tooltips
-		$('[data-toggle="tooltip"]').tooltip({ delay: { show: 750, hide: 0 } });
+		$('[data-toggle="tooltip"]').tooltip({ trigger: "hover",
+     		delay: { show: 750, hide: 0 } });
 	}
 	/*********************************************************
 	**********************CHEST FUNCTIONS*********************

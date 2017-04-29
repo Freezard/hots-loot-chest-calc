@@ -76,7 +76,6 @@ var HotSRerollCalc = (function() {
 		$("#buttonKeepItems").on("click", function() {
 			$(this).tooltip('hide'); keepItems();});
 		
-		$("#chest-type").on("change", selectChest);
 	}
 	
 	function initDisplay() {
@@ -97,14 +96,13 @@ var HotSRerollCalc = (function() {
 	/*********************************************************
 	**********************CHEST FUNCTIONS*********************
 	*********************************************************/
-	function selectChest() {
-		updateAverageValue($(this).val());
+		updateAverageValue(rarity);
 		resetItems();
-		items[4].rarity = $(this).val();
+		items[4].rarity = rarity;
 		displaySelectedItems();
 		updateChestValue();
 		displayResult();
-		$("#image-panel img").attr("src", "images/chest_" + $(this).val() + ".png");
+		$("#image-panel img").attr("src", "images/chest_" + rarity + ".png");
 	}
 	
 	function updateChestValue() {
@@ -247,8 +245,6 @@ var HotSRerollCalc = (function() {
 				itemsOwned[items[item].rarity]++;
 		
 		updateLocalStorage();
-		updateAverageValue($("#chest-type").val());
-		displayResult();
 		displayCollection();
 	}
 	

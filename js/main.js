@@ -80,6 +80,7 @@ var HotSRerollCalc = (function() {
 	}
 	
 	function initItems(nrItems) {
+		currentItems = {};
 		for (var i = 1; i <= nrItems; i++) {
 			currentItems[i] = {};
 			currentItems[i].rarity = "common";

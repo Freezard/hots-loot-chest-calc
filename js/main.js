@@ -25,8 +25,8 @@ var HotSRerollCalc = (function() {
 		epic: 0,
 		legendary: 0
 	};
-	
-	var itemValue = {
+
+	var craftingCost = {
 		common: 40,
 		rare: 100,
 		epic: 400,
@@ -48,27 +48,11 @@ var HotSRerollCalc = (function() {
 		legendary: 0.0205
 	};
 
-	var items = {
-		1: { rarity: "common",
-		      duplicate: false
-		},
-		2: { rarity: "common",
-		      duplicate: false
-		},
-		3: { rarity: "common",
-		      duplicate: false
-		},
-		4: { rarity: "common",
-		      duplicate: false
-		}
-	};
+	var currentItems = {};
 	/*********************************************************
 	***************************INIT***************************
 	*********************************************************/
 	function initEventListeners() {
-		// eventListener for item panels
-		$(".item-panel ul").on("click", setItem);
-			
 		// eventListener for entering collection data
 		$(".collection-panel :text").on("focusout", setItemsOwned);	
 
@@ -85,31 +69,37 @@ var HotSRerollCalc = (function() {
 	}
 	
 	function initDisplay() {
-		// Pre-select item rarity for each item
-		displaySelectedItems();
+		newChest($("#chest-type").val());
 			
 		// Display collection data
 		displayCollection();
-			
-		// Calculate chest values and display result
-		updateChestValue();
-		updateAverageValue($("#chest-type").val());
-		displayResult();
 
 		// Activate tooltips
 		$('[data-toggle="tooltip"]').tooltip({ trigger: "hover",
      		delay: { show: 750, hide: 0 } });
 	}
+	
+	function initItems(nrItems) {
+		for (var i = 1; i <= nrItems; i++) {
+			currentItems[i] = {};
+			currentItems[i].rarity = "common";
+			currentItems[i].duplicate = false;
+		}
+			
+	}
 	/*********************************************************
 	**********************CHEST FUNCTIONS*********************
 	*********************************************************/
 	function newChest(rarity) {
+		var nrItems = rarity == "legendary" ? 5 : 4;
 		
-		updateAverageValue(rarity);
+		initItems(nrItems);
+		buildItemBoxes(nrItems);
 		resetItems();
-		items[4].rarity = rarity;
+		currentItems[nrItems].rarity = rarity;
 		displaySelectedItems();
 		updateChestValue();
+		updateAverageValue(rarity);
 		displayResult();
 		$("#image-panel img").attr("src", "images/chest_" + rarity + ".png");
 	}
@@ -117,9 +107,10 @@ var HotSRerollCalc = (function() {
 	function updateChestValue() {
 		var chestValue = 0;
 		
-		for (item in items)
-			chestValue += items[item].duplicate ?
-			    duplicateValue[items[item].rarity] : itemValue[items[item].rarity];
+		for (item in currentItems)
+			chestValue += currentItems[item].duplicate ?
+			    duplicateValue[currentItems[item].rarity] :
+				craftingCost[currentItems[item].rarity];
 		
 		$("#chest-value").html((chestValue));		
 	}
@@ -134,7 +125,7 @@ var HotSRerollCalc = (function() {
 		else if (rarity == "epic")
 			averageValue = getCommonValue() * 3 + getEpicValue();
 		else if (rarity == "legendary")
-			averageValue = getCommonValue() * 3 + getLegendaryValue();
+			averageValue = getCommonValue() * 4 + getLegendaryValue();
 		
 		$("#average-value").html((averageValue).toFixed(1));
 	}
@@ -144,7 +135,7 @@ var HotSRerollCalc = (function() {
 		
 		for (rarity in chanceOfGetting) {
 		    value += chanceOfGetting[rarity] * ((itemsOwned[rarity] / itemsTotal[rarity]) * duplicateValue[rarity]
-		          + ((itemsTotal[rarity] - itemsOwned[rarity]) / itemsTotal[rarity]) * itemValue[rarity]);
+		          + ((itemsTotal[rarity] - itemsOwned[rarity]) / itemsTotal[rarity]) * craftingCost[rarity]);
 		}
 		return value;
 	}
@@ -156,9 +147,9 @@ var HotSRerollCalc = (function() {
 			if (rarity == "common") continue;
 			else if (rarity == "rare")
 		        value += (1 - (chanceOfGetting.epic + chanceOfGetting.legendary)) * ((itemsOwned[rarity] / itemsTotal[rarity]) * duplicateValue[rarity]
-		              + ((itemsTotal[rarity] - itemsOwned[rarity]) / itemsTotal[rarity]) * itemValue[rarity]);
+		              + ((itemsTotal[rarity] - itemsOwned[rarity]) / itemsTotal[rarity]) * craftingCost[rarity]);
 			else value += chanceOfGetting[rarity] * ((itemsOwned[rarity] / itemsTotal[rarity]) * duplicateValue[rarity]
-		               + ((itemsTotal[rarity] - itemsOwned[rarity]) / itemsTotal[rarity]) * itemValue[rarity]);
+		               + ((itemsTotal[rarity] - itemsOwned[rarity]) / itemsTotal[rarity]) * craftingCost[rarity]);
 		}
 		return value;
 	}
@@ -170,9 +161,9 @@ var HotSRerollCalc = (function() {
 			if (rarity == "common" || rarity == "rare") continue;
 			else if (rarity == "epic")
 		        value += (1 - chanceOfGetting.legendary) * ((itemsOwned[rarity] / itemsTotal[rarity]) * duplicateValue[rarity]
-		              + ((itemsTotal[rarity] - itemsOwned[rarity]) / itemsTotal[rarity]) * itemValue[rarity]);
+		              + ((itemsTotal[rarity] - itemsOwned[rarity]) / itemsTotal[rarity]) * craftingCost[rarity]);
 			else value += chanceOfGetting[rarity] * ((itemsOwned[rarity] / itemsTotal[rarity]) * duplicateValue[rarity]
-		               + ((itemsTotal[rarity] - itemsOwned[rarity]) / itemsTotal[rarity]) * itemValue[rarity]);
+		               + ((itemsTotal[rarity] - itemsOwned[rarity]) / itemsTotal[rarity]) * craftingCost[rarity]);
 		}
 		return value;
 	}
@@ -180,13 +171,30 @@ var HotSRerollCalc = (function() {
 	function getLegendaryValue() {
 		var value = 0;
 		value += 1 * ((itemsOwned.legendary / itemsTotal.legendary) * duplicateValue.legendary
-		      + ((itemsTotal.legendary - itemsOwned.legendary) / itemsTotal.legendary) * itemValue.legendary);
+		      + ((itemsTotal.legendary - itemsOwned.legendary) / itemsTotal.legendary) * craftingCost.legendary);
 
 		return value;
 	}
 	/*********************************************************
 	**************************DISPLAY*************************
-	*********************************************************/		
+	*********************************************************/
+	function buildItemBoxes(nrItems) {
+		$("#items-row").html("");
+		
+		var columns = nrItems == 5 ? "5ths" : 12 / nrItems;
+		for (var i = 1; i <= nrItems; i++) {
+		    var div = $("<div/>", { class: "col-xs-" + columns + " item-panel", text: "Item " + i });
+			var ul = $("<ul/>", { id: "item" + i }).on("click", setItem);
+			ul.append($("<li/>").append($("<a/>", { class: "common", text: "C" })));
+			ul.append($("<li/>").append($("<a/>", { class: "rare", text: "R" })));
+			ul.append($("<li/>").append($("<a/>", { class: "epic", text: "E" })));
+			ul.append($("<li/>").append($("<a/>", { class: "legendary", text: "L" })));
+			ul.append($("<li/>").append($("<a/>", { class: "duplicate", text: "Duplicate" })));
+			div.append(ul);
+			$("#items-row").append(div);
+		}
+	}
+	
 	function displayResult() {
 		if (parseFloat($("#chest-value").html()) > parseFloat($("#average-value").html())) {
 			$("#result-average").css("background-color", "#FFFFFF");
@@ -206,15 +214,15 @@ var HotSRerollCalc = (function() {
 	}
 	
 	function displaySelectedItems() {
-		for (item in items) {
+		for (item in currentItems) {
 			for (rarity in raritiesEnum)
 			    $("#item" + item + " a." + rarity).removeClass("selected");
 			
 			$("#item" + item + " a.duplicate").removeClass("selected");
 		}		
 		// Select item rarity for each item
-		for (item in items)
-			$("#item" + item + " a." + items[item].rarity).addClass("selected");
+		for (item in currentItems)
+			$("#item" + item + " a." + currentItems[item].rarity).addClass("selected");
 	}
 	/*********************************************************
 	**********************ITEM FUNCTIONS**********************
@@ -225,13 +233,13 @@ var HotSRerollCalc = (function() {
 		  for (var i = 0; i < 4; i++)
 			  $(itemBoxes[i]).removeClass("selected");
 		
-	      items[$(this).attr("id").charAt(4)].rarity = 
+	      currentItems[$(this).attr("id").charAt(4)].rarity = 
 		      $(evt.target).attr("class").split(" ")[0];
 		  $(evt.target).toggleClass("selected");
 	  }
 	  else {
-		  var duplicate = items[$(this).attr("id").charAt(4)].duplicate;
-	      items[$(this).attr("id").charAt(4)].duplicate = !duplicate;
+		  var duplicate = currentItems[$(this).attr("id").charAt(4)].duplicate;
+	      currentItems[$(this).attr("id").charAt(4)].duplicate = !duplicate;
 		  $(evt.target).toggleClass("selected");
 	  }
 	  
@@ -249,9 +257,9 @@ var HotSRerollCalc = (function() {
 	}
 	
 	function keepItems() {
-		for (item in items)
-			if (!items[item].duplicate)
-				itemsOwned[items[item].rarity]++;
+		for (item in currentItems)
+			if (!currentItems[item].duplicate)
+				itemsOwned[currentItems[item].rarity]++;
 		
 		updateLocalStorage();
 		newChest($("#chest-type").val());
@@ -259,9 +267,9 @@ var HotSRerollCalc = (function() {
 	}
 	
 	function resetItems() {
-		for (item in items) {
-			items[item].rarity = "common";
-			items[item].duplicate = false;
+		for (item in currentItems) {
+			currentItems[item].rarity = "common";
+			currentItems[item].duplicate = false;
 		}
 		
 		displaySelectedItems();

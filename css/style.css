@@ -70,20 +70,23 @@ body {
 }
 .item-panel li a.legendary {
   background-color: rgba(255, 165, 0, 0.1);
-  border: px solid #FFFFFF;
+  border: 1px solid #FFFFFF;
 }
 .item-panel li a.legendary.selected {
   background-color: rgba(255, 165, 0, 0.5);
   border: 1px solid rgba(255, 165, 0, 1.0);
 }
 .item-panel li a.duplicate {
-  margin-top: 3px;
+  padding-top: 5px;
   width: 66px;
   height: 20px;
+  line-height: 10px;
   background-color: #FFFFFF;
+  border-top: 2px solid #FFFFFF;
 }
 .item-panel li a.duplicate.selected {
-  background-color: #E3D3C8;
+  background-color: rgba(227, 211, 200, 1.0);
+  border-top: 2px solid #FFFFFF;
 }
 .result-panel {
   font-size: 16px;

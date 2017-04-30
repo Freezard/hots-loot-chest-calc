@@ -101,7 +101,7 @@ var HotSRerollCalc = (function() {
 		updateChestValue();
 		updateAverageValue(rarity);
 		displayResult();
-		$("#image-panel img").attr("src", "images/chest_" + rarity + ".png");
+		$("#image-panel img").attr("src", "images/chest_" + rarity + ".jpg");
 	}
 	
 	function updateChestValue() {

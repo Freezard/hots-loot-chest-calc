@@ -1,0 +1,534 @@
+{
+	"heroes": [
+	    {
+			"name": "Abathur",
+			"rarity": "legendary"
+		},
+	    {
+			"name": "Alarak",
+			"rarity": "legendary"
+		},
+	    {
+			"name": "Anub'arak",
+			"rarity": "epic"
+		},
+	    {
+			"name": "Artanis",
+			"rarity": "legendary"
+		},
+	    {
+			"name": "Arthas",
+			"rarity": "epic"
+		},
+	    {
+			"name": "Auriel",
+			"rarity": "legendary"
+		},
+	    {
+			"name": "Azmodan",
+			"rarity": "rare"
+		},
+	    {
+			"name": "Brightwing",
+			"rarity": "epic"
+		},
+	    {
+			"name": "The Butcher",
+			"rarity": "epic"
+		},
+	    {
+			"name": "Cassia",
+			"rarity": "legendary"
+		},
+	    {
+			"name": "Chen",
+			"rarity": "epic"
+		},
+	    {
+			"name": "Cho'gall",
+			"rarity": "legendary"
+		},
+	    {
+			"name": "Chromie",
+			"rarity": "legendary"
+		},
+	    {
+			"name": "Dehaka",
+			"rarity": "legendary"
+		},
+	    {
+			"name": "Diablo",
+			"rarity": "rare"
+		},
+	    {
+			"name": "D.Va",
+			"rarity": "legendary"
+		},
+	    {
+			"name": "E.T.C.",
+			"rarity": "rare"
+		},
+	    {
+			"name": "Falstad",
+			"rarity": "epic"
+		},
+	    {
+			"name": "Gazlowe",
+			"rarity": "rare"
+		},
+	    {
+			"name": "Genji",
+			"rarity": "legendary"
+		},
+	    {
+			"name": "Greymane",
+			"rarity": "epic"
+		},
+	    {
+			"name": "Gul'dan",
+			"rarity": "legendary"
+		},
+	    {
+			"name": "Illidan",
+			"rarity": "epic"
+		},
+	    {
+			"name": "Jaina",
+			"rarity": "epic"
+		},
+	    {
+			"name": "Johanna",
+			"rarity": "epic"
+		},
+	    {
+			"name": "Kael'thas",
+			"rarity": "epic"
+		},
+	    {
+			"name": "Kerrigan",
+			"rarity": "epic"
+		},
+	    {
+			"name": "Kharazim",
+			"rarity": "epic"
+		},
+	    {
+			"name": "Leoric",
+			"rarity": "epic"
+		},
+	    {
+			"name": "Li Li",
+			"rarity": "rare"
+		},
+	    {
+			"name": "Li-Ming",
+			"rarity": "legendary"
+		},
+	    {
+			"name": "The Lost Vikings",
+			"rarity": "legendary"
+		},
+	    {
+			"name": "Lt. Morales",
+			"rarity": "legendary"
+		},
+	    {
+			"name": "Lucio",
+			"rarity": "legendary"
+		},
+	    {
+			"name": "Lunara",
+			"rarity": "epic"
+		},
+	    {
+			"name": "Malfurion",
+			"rarity": "rare"
+		},
+	    {
+			"name": "Medivh",
+			"rarity": "legendary"
+		},
+	    {
+			"name": "Muradin",
+			"rarity": "rare"
+		},
+	    {
+			"name": "Murky",
+			"rarity": "epic"
+		},
+	    {
+			"name": "Nazeebo",
+			"rarity": "epic"
+		},
+	    {
+			"name": "Nova",
+			"rarity": "epic"
+		},
+	    {
+			"name": "Probius",
+			"rarity": "legendary"
+		},
+	    {
+			"name": "Ragnaros",
+			"rarity": "legendary"
+		},
+	    {
+			"name": "Raynor",
+			"rarity": "rare"
+		},
+	    {
+			"name": "Rehgar",
+			"rarity": "epic"
+		},
+	    {
+			"name": "Rexxar",
+			"rarity": "rare"
+		},
+	    {
+			"name": "Samuro",
+			"rarity": "legendary"
+		},
+	    {
+			"name": "Sgt. Hammer",
+			"rarity": "epic"
+		},
+	    {
+			"name": "Sonya",
+			"rarity": "epic"
+		},
+	    {
+			"name": "Stitches",
+			"rarity": "epic"
+		},
+	    {
+			"name": "Sylvanas",
+			"rarity": "epic"
+		},
+	    {
+			"name": "Tassadar",
+			"rarity": "epic"
+		},
+	    {
+			"name": "Thrall",
+			"rarity": "epic"
+		},
+	    {
+			"name": "Tracer",
+			"rarity": "legendary"
+		},
+	    {
+			"name": "Tychus",
+			"rarity": "epic"
+		},
+	    {
+			"name": "Tyrael",
+			"rarity": "epic"
+		},
+	    {
+			"name": "Tyrande",
+			"rarity": "epic"
+		},
+	    {
+			"name": "Uther",
+			"rarity": "epic"
+		},
+	    {
+			"name": "Valeera",
+			"rarity": "legendary"
+		},
+	    {
+			"name": "Valla",
+			"rarity": "rare"
+		},
+	    {
+			"name": "Varian",
+			"rarity": "legendary"
+		},
+	    {
+			"name": "Xul",
+			"rarity": "legendary"
+		},
+	    {
+			"name": "Zagara",
+			"rarity": "epic"
+		},
+	    {
+			"name": "Zarya",
+			"rarity": "legendary"
+		},
+	    {
+			"name": "Zeratul",
+			"rarity": "legendary"
+		},
+	    {
+			"name": "Zul'jin",
+			"rarity": "legendary"
+		}
+	],
+	"skins": [
+	    {
+			"name": "Abathur",
+			"rarity": "legendary"
+		},
+	    {
+			"name": "Alarak",
+			"rarity": "legendary"
+		},
+	    {
+			"name": "Anub'arak",
+			"rarity": "epic"
+		},
+	    {
+			"name": "Artanis",
+			"rarity": "legendary"
+		},
+	    {
+			"name": "Arthas",
+			"rarity": "epic"
+		},
+	    {
+			"name": "Auriel",
+			"rarity": "legendary"
+		},
+	    {
+			"name": "Azmodan",
+			"rarity": "rare"
+		},
+	    {
+			"name": "Brightwing",
+			"rarity": "epic"
+		},
+	    {
+			"name": "The Butcher",
+			"rarity": "epic"
+		},
+	    {
+			"name": "Cassia",
+			"rarity": "legendary"
+		},
+	    {
+			"name": "Chen",
+			"rarity": "epic"
+		},
+	    {
+			"name": "Cho'gall",
+			"rarity": "legendary"
+		},
+	    {
+			"name": "Chromie",
+			"rarity": "legendary"
+		},
+	    {
+			"name": "Dehaka",
+			"rarity": "legendary"
+		},
+	    {
+			"name": "Diablo",
+			"rarity": "rare"
+		},
+	    {
+			"name": "D.Va",
+			"rarity": "legendary"
+		},
+	    {
+			"name": "E.T.C.",
+			"rarity": "rare"
+		},
+	    {
+			"name": "Falstad",
+			"rarity": "epic"
+		},
+	    {
+			"name": "Gazlowe",
+			"rarity": "rare"
+		},
+	    {
+			"name": "Genji",
+			"rarity": "legendary"
+		},
+	    {
+			"name": "Greymane",
+			"rarity": "epic"
+		},
+	    {
+			"name": "Gul'dan",
+			"rarity": "legendary"
+		},
+	    {
+			"name": "Illidan",
+			"rarity": "epic"
+		},
+	    {
+			"name": "Jaina",
+			"rarity": "epic"
+		},
+	    {
+			"name": "Johanna",
+			"rarity": "epic"
+		},
+	    {
+			"name": "Kael'thas",
+			"rarity": "epic"
+		},
+	    {
+			"name": "Kerrigan",
+			"rarity": "epic"
+		},
+	    {
+			"name": "Kharazim",
+			"rarity": "epic"
+		},
+	    {
+			"name": "Leoric",
+			"rarity": "epic"
+		},
+	    {
+			"name": "Li Li",
+			"rarity": "rare"
+		},
+	    {
+			"name": "Li-Ming",
+			"rarity": "legendary"
+		},
+	    {
+			"name": "The Lost Vikings",
+			"rarity": "legendary"
+		},
+	    {
+			"name": "Lt. Morales",
+			"rarity": "legendary"
+		},
+	    {
+			"name": "Lucio",
+			"rarity": "legendary"
+		},
+	    {
+			"name": "Lunara",
+			"rarity": "epic"
+		},
+	    {
+			"name": "Malfurion",
+			"rarity": "rare"
+		},
+	    {
+			"name": "Medivh",
+			"rarity": "legendary"
+		},
+	    {
+			"name": "Muradin",
+			"rarity": "rare"
+		},
+	    {
+			"name": "Murky",
+			"rarity": "epic"
+		},
+	    {
+			"name": "Nazeebo",
+			"rarity": "epic"
+		},
+	    {
+			"name": "Nova",
+			"rarity": "epic"
+		},
+	    {
+			"name": "Probius",
+			"rarity": "legendary"
+		},
+	    {
+			"name": "Ragnaros",
+			"rarity": "legendary"
+		},
+	    {
+			"name": "Raynor",
+			"rarity": "rare"
+		},
+	    {
+			"name": "Rehgar",
+			"rarity": "epic"
+		},
+	    {
+			"name": "Rexxar",
+			"rarity": "rare"
+		},
+	    {
+			"name": "Samuro",
+			"rarity": "legendary"
+		},
+	    {
+			"name": "Sgt. Hammer",
+			"rarity": "epic"
+		},
+	    {
+			"name": "Sonya",
+			"rarity": "epic"
+		},
+	    {
+			"name": "Stitches",
+			"rarity": "epic"
+		},
+	    {
+			"name": "Sylvanas",
+			"rarity": "epic"
+		},
+	    {
+			"name": "Tassadar",
+			"rarity": "epic"
+		},
+	    {
+			"name": "Thrall",
+			"rarity": "epic"
+		},
+	    {
+			"name": "Tracer",
+			"rarity": "legendary"
+		},
+	    {
+			"name": "Tychus",
+			"rarity": "epic"
+		},
+	    {
+			"name": "Tyrael",
+			"rarity": "epic"
+		},
+	    {
+			"name": "Tyrande",
+			"rarity": "epic"
+		},
+	    {
+			"name": "Uther",
+			"rarity": "epic"
+		},
+	    {
+			"name": "Valeera",
+			"rarity": "legendary"
+		},
+	    {
+			"name": "Valla",
+			"rarity": "rare"
+		},
+	    {
+			"name": "Varian",
+			"rarity": "legendary"
+		},
+	    {
+			"name": "Xul",
+			"rarity": "legendary"
+		},
+	    {
+			"name": "Zagara",
+			"rarity": "epic"
+		},
+	    {
+			"name": "Zarya",
+			"rarity": "legendary"
+		},
+	    {
+			"name": "Zeratul",
+			"rarity": "legendary"
+		},
+	    {
+			"name": "Zul'jin",
+			"rarity": "legendary"
+		}
+	]	
+}

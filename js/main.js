@@ -13,10 +13,10 @@ var HotSRerollCalc = (function() {
 	};
 	
 	var itemsTotal = {
-		common: 573,
-		rare: 475,
-		epic: 295,
-		legendary: 139
+		common: 592,
+		rare: 484,
+		epic: 306,
+		legendary: 148
 	};
 	
 	var itemsOwned = {

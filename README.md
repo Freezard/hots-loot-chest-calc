@@ -1,9 +1,9 @@
-# HotS Reroll Calc
+# HotS Reroll Calc (Discontinued)
 Helps determine when to consider rerolling loot chests.
 
-Website can be found at https://freezard.github.io/hots-reroll-calc/
+Web app can be found at https://freezard.github.io/hots-reroll-calc/
 
-![Site overview](images/readme-1.jpg)
+![Site overview](resources/images/readme-1.jpg)
 
 ## FEATURES
 - Displays the effective amount of shards you will receive from a loot chest.

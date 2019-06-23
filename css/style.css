@@ -6,10 +6,25 @@ body {
   font-size: 10px;
   margin: 0;
   padding: 0;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 #container {
   margin: 0px auto;
-  max-width: 940px;
+  max-width: 100%;
+  border: 1px solid;
+}
+.justify-content-end .col-4 {
+  margin-top: 5px;
+  font-size: 14px;
+  border: 1px solid;
+}
+.justify-content-end input {
+  margin-right: 5px;
+  width: 150px;
+}
+.justify-content-end .col-4 div {
+  margin-left: 300px;
+  margin-top: 2px;
 }
 #containerRow {
   margin: 0px auto;
@@ -19,77 +34,71 @@ body {
   text-align: center;
 }
 #items-row {
-  /*width: 384px;*/
-  margin: 0px auto;
+  //margin: 0px auto;
+  margin-top: 25px;
+  margin-bottom: 25px;
 }
 .item-panel {
-  margin-top: 25px;
-  margin-bottom: 15px;
+  padding: 0px;
 }
-.item-panel ul {
-  list-style-type: none;
-  margin-top: 2px;
-  padding: 0;
-  display: inline-block;
+.item-panel .row {
+  margin: 0px auto;
+  width: 66px;
 }
-.item-panel li a {
-  float: left;
-  width: 33px;
-  font-size: 10px;
-  color: black;
-  padding: 5px 0px;
-  margin: 0px;
-  text-decoration: none;
-  text-transform: uppercase;
-  background-color: #FFFFFF;
+.item-panel .col-6 {
   cursor: pointer;
+  padding: 5px;
 }
-.item-panel li a.common {
+.item-panel div.common {
   background-color: rgba(94, 111, 121, 0.1);
   border: 1px solid #FFFFFF;
 }
-.item-panel li a.common.selected {
+.item-panel div.common.selected {
   background-color: rgba(94, 111, 121, 0.5);
   border: 1px solid rgba(94, 111, 121, 1.0);
 }
-.item-panel li a.rare {
+.item-panel div.rare {
   background-color: rgba(0, 0, 250, 0.1);
   border: 1px solid #FFFFFF;
 }
-.item-panel li a.rare.selected {
+.item-panel div.rare.selected {
   background-color: rgba(0, 0, 250, 0.5);
   border: 1px solid rgba(0, 0, 250, 1.0);
 }
-.item-panel li a.epic {
+.item-panel div.epic {
   background-color: rgba(128, 0, 128, 0.1);
   border: 1px solid #FFFFFF;
 }
-.item-panel li a.epic.selected {
+.item-panel div.epic.selected {
   background-color: rgba(128, 0, 128, 0.5);
   border: 1px solid rgba(128, 0, 128, 1.0);
 }
-.item-panel li a.legendary {
+.item-panel div.legendary {
   background-color: rgba(255, 165, 0, 0.1);
   border: 1px solid #FFFFFF;
 }
-.item-panel li a.legendary.selected {
+.item-panel div.legendary.selected {
   background-color: rgba(255, 165, 0, 0.5);
   border: 1px solid rgba(255, 165, 0, 1.0);
 }
-.item-panel li a.duplicate {
-  padding-top: 5px;
-  width: 66px;
-  height: 20px;
-  line-height: 10px;
+.item-panel div.duplicate {
   background-color: #FFFFFF;
-  border-top: 2px solid #FFFFFF;
+  cursor: pointer;
+  width: 66px;
+  margin: 0px auto;
+  margin-top: 2px;
 }
-.item-panel li a.duplicate.selected {
+.item-panel div.duplicate.selected {
   background-color: rgba(227, 211, 200, 1.0);
-  border-top: 2px solid #FFFFFF;
 }
 .result-panel {
   font-size: 16px;
+}
+#chest-value.selected {
+  background-color: rgba(152, 255, 33, 1.0);
+}
+#average-value.selected {
+  background-color: rgba(152, 255, 33, 1.0);
 }
 .collection-header {
   font-size: 14px;
@@ -115,8 +124,9 @@ input {
 }
 hr {
   height: 6px;
-  background: url(../images/hr.png) repeat-x 0 0;
-  border: 0;
+  background: url(../resources/images/hr.png) repeat-x 0 0;
+  margin: 20px 0;
+  
 }
 .vertical-center {
   min-height: 100%;  /* Fallback for browsers do NOT support vh unit */

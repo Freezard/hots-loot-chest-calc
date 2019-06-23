@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.7/angular.min.js"></script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>HotS Reroll Calc - </title>
 <!-- Bootstrap CSS CDN -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="css/style.css">
 <!-- Google Analytics -->
 <script>
@@ -16,84 +17,85 @@
 
   ga('create', 'UA-62707621-2', 'auto');
   ga('send', 'pageview');
-
 </script>
 </head>
-<body>
-<div id="container" class="container vertical-center">
-  <div id="containerRow" class="row">
-	<div id="content" class="col-xs-12">
-	  <div class="row">
-	    <div id="chest-type-panel" class="col-xs-12">
-		  <select id="chest-type">
-		    <option value="common">Common</option>
-            <option value="rare">Rare</option>
-            <option value="epic">Epic</option>
-            <option value="legendary">Veteran</option>
-		  </select>
+<body ng-app="HotSRerollCalc">
+<div id="container" class="container">
+  <div id="header" class="row justify-content-end" ng-view></div>
+  <div id="containerRow" class="row vertical-center">
+	<div id="content" class="col">
+	  <div class="row" ng-controller="chestCtrl">
+	    <div id="chest-type-panel" class="col">
+		  <select id="chest-type" ng-model="model.currentChest" ng-options="x as (x | capitalizeFilter) for x in raritiesEnum" ng-change="changeChest()"></select>
 		</div>
 	  </div>
 	  <div class="row">
-	    <div id="image-panel" class="col-xs-12">
-          <img src="images/chest_common.jpg" alt="Loot chest" width="320" height="180">
+	    <div id="image-panel" class="col">
+          <img ng-src="resources/images/chest_{{ model.currentChest }}.jpg" alt="Loot chest" width="320" height="180">
 		</div>
 	  </div>
-      <div id="items-row" class="row noselect">
-	  </div>
-	  <div class="row">
-	    <div class="col-xs-6 result-panel">
-		  <span id="result-chest" data-toggle="tooltip" title="Shards received from this chest">Chest Value: <span id="chest-value">200</span></span>
-		</div>
-		<div class="col-xs-6 result-panel">
-		  <span id="result-average" data-toggle="tooltip" title="Shards received from a chest on average (non-duplicates are worth their full shard value)">Average Value: <span id="average-value">577</span></span>
+      <div id="items-row" class="row noselect" ng-controller="itemBoxesCtrl">
+		<div ng-repeat="i in model.currentItems" class="col item-panel">Item {{ $index + 1 }}	  
+		  <div class="row">
+		    <div ng-repeat="r in raritiesEnum" ng-click="clickRarity(i, r)" class="col-6 {{ r }}" ng-class="{ selected : i.rarity == r }">{{ r.charAt(0) | uppercase }}</div>
+		  </div>
+		  <div class="duplicate" ng-click="clickDuplicate(i)" ng-class="{ selected : i.duplicate }">DUPLICATE</div>
 		</div>
 	  </div>
-	  <div class="row">
-	    <div class="col-xs-12 collection-header">
-		  <button id="buttonRerollItems" data-toggle="tooltip" title="Discard and reset items">Reroll Items</button>
-		  <button id="buttonKeepItems" data-toggle="tooltip" title="Add items from this chest to your collection">Keep Items</button>
+	  <div class="row" ng-controller="resultPanelCtrl">
+	    <div class="col result-panel">
+		  <span id="result-chest" data-toggle="tooltip" title="Shards received from this chest">Chest Value: <span id="chest-value" ng-class="{ selected : chestValueBigger() }">{{ chestValue() | number : 1}}</span></span>
+		</div>
+		<div class="col result-panel">
+		  <span id="result-average" data-toggle="tooltip" title="Shards received from a chest on average (non-duplicates are worth their full shard value)">Average Value: <span id="average-value" ng-class="{ selected : !chestValueBigger() }">{{ averageValue(model.currentChest) | number : 1 }}</span></span>
+		</div>
+	  </div>
+	  <div class="row" ng-controller="buttonsCtrl">
+	    <div class="col collection-header">
+		  <button id="buttonRerollItems" data-toggle="tooltip" title="Discard and reset items" ng-click="rerollItems()">Reroll Items</button>
+		  <button id="buttonKeepItems" data-toggle="tooltip" title="Add items from this chest to your collection" ng-click="keepItems()">Keep Items</button>
 	    </div>
 	  </div>	  
 	  <div class="row">
-	    <div class="col-xs-12 collection-header">
+	    <div class="col collection-header">
 	      <hr>
 		  Collection
 	    </div>
 	  </div>
-	  <div class="row">
-	    <div class="col-xs-6 collection-panel common">
-		  <span data-toggle="tooltip" title="Common items owned/total">Common:</span> <input type="text"> / <span class="items-total">0</span>
-		</div>
-		<div class="col-xs-6 collection-panel rare">
-		  <span data-toggle="tooltip" title="Rare items owned/total">Rare:</span> <input type="text"> / <span class="items-total">0</span>
+	  <div class="row" ng-controller="collectionCtrl">
+	    <div class="col-6 collection-panel" ng-repeat="r in raritiesEnum">
+		  <span data-toggle="tooltip" title="{{ r | capitalizeFilter }} items owned/total">{{ r | capitalizeFilter }}:</span> <input type="text" ng-model="itemsOwned[r]" ng-change="save()"> / {{ itemsTotal[r] }}
 		</div>
 	  </div>
-	  <div class="row">
-	    <div class="col-xs-6 collection-panel epic">
-		  <span data-toggle="tooltip" title="Epic items owned/total">Epic:</span> <input type="text"> / <span class="items-total">0</span>
-		</div>
-		<div class="col-xs-6 collection-panel legendary">
-		  <span data-toggle="tooltip" title="Legendary items owned/total">Legendary:</span> <input type="text"> / <span class="items-total">0</span>
-		</div>
-	  </div>		  
     </div>
   </div>
 </div>
 <!-- jQuery CDN -->
-<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <!-- jQuery local fallback -->
-<script>window.jQuery || document.write('<script type="text/javascript" src="js/vendor/jquery-2.1.4.min.js"><\/script>')</script>
+<script>window.jQuery || document.write('<script type="text/javascript" src="vendor/jquery-2.1.4.min.js"><\/script>')</script>
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
 <!-- Bootstrap JS CDN -->
-<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
 <!-- Bootstrap JS local fallback -->
-<script>if(typeof($.fn.modal) === 'undefined') {document.write('<script type="text/javascript" src="js/vendor/bootstrap.min.js"><\/script>')}</script>
+<script>if(typeof($.fn.modal) === 'undefined') {document.write('<script type="text/javascript" src="vendor/bootstrap.min.js"><\/script>')}</script>
 <!-- Bootstrap CSS local fallback -->
 <script>
     $(document).ready(function() {
     var bodyColor = $('body').css('color');
     if(bodyColor != 'rgb(51, 51, 51)') {
-    $("head").prepend('<link rel="stylesheet" type="text/css" href="css/vendor/bootstrap.min.css">');}});
+    $("head").prepend('<link rel="stylesheet" type="text/css" href="vendor/bootstrap.min.css">');}});
 </script>
-<script type="text/javascript" src="js/main.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
+<script type="text/javascript" src="app/app.js"></script>
+<script type="text/javascript" src="app/controllers/calc/chestCtrl.js"></script>
+<script type="text/javascript" src="app/controllers/calc/itemBoxesCtrl.js"></script>
+<script type="text/javascript" src="app/controllers/calc/resultPanelCtrl.js"></script>
+<script type="text/javascript" src="app/controllers/calc/buttonsCtrl.js"></script>
+<script type="text/javascript" src="app/controllers/calc/collectionCtrl.js"></script>
+<script type="text/javascript" src="app/factories/common/storageFactory.js"></script>
+<script type="text/javascript" src="app/factories/common/itemsFactory.js"></script>
+<script type="text/javascript" src="app/filters/common/capitalizeFilter.js"></script>
 </body>
 </html>
